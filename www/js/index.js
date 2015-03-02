@@ -2,6 +2,7 @@
 var phpFunctions = "http://85.10.228.20:600/functions.php";
 var utilizador = null;
 var connection = null;
+var reuniao = null;
 var app = { initialize: function() { this.bindEvents(); }, bindEvents: function() { document.addEventListener('deviceready', this.onDeviceReady, false); }, onDeviceReady: deviceIsReady }
 
 $(document).ready(documentIsReady);
@@ -18,9 +19,21 @@ function deviceIsReady() {
 		$(document).on("pagecontainerchange", pageContainerChanged);
 		$("#agendarBT").click(function(e){ $("#agendar-reuniao-form")[0].reset(); })
 		$("#saveReuniao").click(saveReuniao);
-		$("#gotoContactosBT").click(loadContactos);	
+		$("#gotoContactosBT").click(loadContactos);		
+		
+		$("#cancelar-reuniao").click(cancelarReuniao);
+		
+		
+		$("#logout").click(function(e) { $.get(phpFunctions, {'operation':'user_logout'}, function(data){ alert(data); }); });
+		
 	}
 }
+
+function cancelarReuniao(e) {
+	
+	
+}
+
 
 function loadContactos(event) {
 	event.preventDefault();
@@ -76,23 +89,43 @@ function reuniaoTaped(e) {
 }
 
 function reuniaoDetalhe(reuniao) {
+	
+	var intervenientesHTML = "";
+	
 	$.mobile.loading( 'hide', { text: 'A carregar detalhes da reunião...', textVisible: true, theme: 'b', html: "" });
 	detalhes = JSON.parse(reuniao);
-	if(detalhes.owner.idutilizador == utilizador.idutilizador) $("#alterar-reuniao, #cancelar-reuniao").show(); else $("#cancelar-reuniao, #alterar-reuniao").hide();
+	reuniao = detalhes.reuniao;
+	
+	if(detalhes.owner.idutilizador == utilizador.idutilizador)
+		$("#alterar-reuniao, #cancelar-reuniao").show();
+	else
+		$("#cancelar-reuniao, #alterar-reuniao").hide();
+
 	$(".profile-picture").css("background-image","url(" + detalhes.owner.foto + ")");
 	$("#owner").empty().html('<strong>' + detalhes.owner.nome + '</strong><br/>' + detalhes.owner.cargo);
 	$("#data").empty().html(detalhes.reuniao.dia);
 	$("#sala").empty().html(detalhes.sala.nome);
 	$("#hora").empty().html('<strong>' + detalhes.reuniao.inicio + 'h / ' + detalhes.reuniao.fim + 'h</strong>');
 	$("#descricao").empty().html(detalhes.reuniao.descricao);
+	
 	$(".intervenientes").empty();
-	var intervenientesHTML = "";
+	
 	for(var i = 0; i < detalhes.intervenientes.length; i++) {
 		if(detalhes.intervenientes[i].aproved == 1) intervenientesHTML = intervenientesHTML + '<div class="interveniente-picture" style="background-image:url(' + detalhes.intervenientes[i].foto + ')"></div>';
 		if(detalhes.intervenientes[i].aproved == 0) intervenientesHTML = intervenientesHTML + '<div class="interveniente-picture" style="background-image:url(img/incognito.png)"></div>';	
 	}
-	if(intervenientesHTML == "") intervenientesHTML = "<p>Nenhum interveniente foi adicionado pelo utilizador que criou a reunião.</p>";
+	
+	if(intervenientesHTML == "")
+		intervenientesHTML = "<p>Nenhum interveniente foi adicionado pelo utilizador que criou a reunião.</p>";
+	
 	$(".intervenientes").html(intervenientesHTML);
+	
+	$("#alterar-reuniao, #cancelar-reuniao").hide();
+	
+	if(detalhes.owner.email == utilizador.email) {
+		$("#alterar-reuniao, #cancelar-reuniao").show();
+	}
+	
 	$("#detalhes").panel("open");
 }
 

@@ -28,7 +28,16 @@
                 <h3 id="sala">Sala de Vidro</h3>
                 <p id="hora"><strong>16:00 / 17:30</strong></p>
                 <button id="alterar-reuniao" class="ui-btn ui-btn-inline">Alterar</button>
-                <button id="cancelar-reuniao" class="ui-btn ui-btn-inline">Cancelar</button>
+                <a href="#cancelar-reuniao" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">Cancelar</a>
+                <div data-role="popup" id="cancelar-reuniao" data-dismissible="false">
+                	<div data-role="header" data-theme="a"><h1>Confirmar</h1></div>
+                    <div data-role="content">
+                        <h3>Tem a certeza que pretende cancelar esta reunião?</h3>
+                        <p>Será enviado um aviso para os intervenientes a comunicar o cancelamento.</p>
+                        <a href="#" id="abortarCancelarReuniao" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Abortar</a>
+                        <a href="#" id="confirmarCancelarReuniao" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">Confirmar</a>
+                    </div>
+                </div>
                 <p id="descricao">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id vulputate est. In posuere pharetra turpis, a auctor nulla. Vivamus in ipsum id sapien porttitor mattis.</p>
                 <p><strong>Intervenientes</strong></p>
                 <div class="intervenientes">
@@ -50,6 +59,7 @@
             <div data-role="content">
             	<a id="agendarBT" href="#agendar" data-position="fixed" data-role="button" data-transition="slide" data-icon="plus">Agendar Reunião</a>
                 <ul id="reunioesLista" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Localizar"></ul>
+                <button data-role="button" id="logout">Log Out</button>
 			</div>
         </div>
         <div data-role="page" id="agendar" data-theme="b">
@@ -109,8 +119,6 @@
             </div>
 		</div>
         <div data-role="page" id="contactos" data-theme="b">
-			<style>
-            </style>
         	<div data-role="panel" data-position="right" id="profile">
             	<div id="no-photo" class="profile-no-photo-small"></div>
                 <p><strong>Nuno Moura</strong><br/>Web Developer</p>
