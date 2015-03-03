@@ -3,6 +3,7 @@ var phpFunctions = "http://85.10.228.20:600/functions.php";
 var utilizador = null;
 var connection = null;
 var curReuniao = null;
+var curIntervenientes = null;
 var app = { initialize: function() { this.bindEvents(); }, bindEvents: function() { document.addEventListener('deviceready', this.onDeviceReady, false); }, onDeviceReady: deviceIsReady }
 
 $(document).ready(documentIsReady);
@@ -33,23 +34,23 @@ function cancelarReuniao(e) {
 }
 
 function prepararReuniaoParaEditar(e) {
-	
 	$("#data-dia").val(curReuniao.dia_ymd[2]);
-	
 	$("#data-mes").val(curReuniao.dia_ymd[1]);
-	
 	$("#inicio-hora").val(curReuniao.inicio.split(":")[0]);
 	$("#inicio-minuto").val(curReuniao.inicio.split(":")[1]);
 	$("#fim-hora").val(curReuniao.fim.split(":")[0]);
 	$("#fim-minuto").val(curReuniao.fim.split(":")[1]);
-	
 	$("#idsala").val(curReuniao.idsala);
-	
 	$("#descricao-reuniao").val(curReuniao.descricao);
-	
-	
-	
-	
+	for(var i = 0; i < curIntervenientes.length; i++) {
+		$("#intervenientes-reuniao option").each(function(index, element) {            
+			if(curIntervenientes[i].idcontacto == $(this).attr("value"))
+				$(this).attr("selected","selected");
+			else
+				$(this).removeAttr("selected");
+        });			
+	}
+	$("select").selectmenu('refresh');	
 }
 
 
@@ -111,6 +112,7 @@ function reuniaoDetalhe(reuniao) {
 	$.mobile.loading( 'hide', { text: 'A carregar detalhes da reunião...', textVisible: true, theme: 'b', html: "" });
 	detalhes = JSON.parse(reuniao);
 	curReuniao = detalhes.reuniao;
+	curIntervenientes = detalhes.intervenientes;
 	
 	if(detalhes.owner.idutilizador == utilizador.idutilizador)
 		$("#alterar-reuniao, #cancelar-reuniao").show();
