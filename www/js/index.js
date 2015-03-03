@@ -16,12 +16,12 @@ function deviceIsReady() {
 	}else{	
 		$.get(phpFunctions, {operation:"user_active"}).done(userIsActive);
 		$("#btIniciarSessao").click(userLogin);
-		$(document).on("pagecontainerchange", pageContainerChanged);
 		$("#agendarBT").click(function(e){ $("#agendar-reuniao-form")[0].reset(); })
 		$("#saveReuniao").click(saveReuniao);
 		$("#gotoContactosBT").click(loadContactos);		
 		$("#confirmarCancelarReuniao").click(cancelarReuniao);
-		$("#logout").click(function(e) { $.get(phpFunctions, {'operation':'user_logout'}, function(data){ alert(data); }); });	
+		$("#logout").click(function(e) { $.get(phpFunctions, {'operation':'user_logout'}, function(data){ alert(data); }); });
+		$("#alterar-reuniao").click(prepararReuniaoParaEditar);
 	}
 }
 
@@ -30,6 +30,26 @@ function cancelarReuniao(e) {
 		$("#detalhes").panel("close");	
 		$.get(phpFunctions, {"operation":"reunioes_html"}, reunioesListFill);
 	});	
+}
+
+function prepararReuniaoParaEditar(e) {
+	
+	$("#data-dia").val(curReuniao.dia_ymd[2]);
+	
+	$("#data-mes").val(curReuniao.dia_ymd[1]);
+	
+	$("#inicio-hora").val(curReuniao.inicio.split(":")[0]);
+	$("#inicio-minuto").val(curReuniao.inicio.split(":")[1]);
+	$("#fim-hora").val(curReuniao.fim.split(":")[0]);
+	$("#fim-minuto").val(curReuniao.fim.split(":")[1]);
+	
+	$("#idsala").val(curReuniao.idsala);
+	
+	$("#descricao-reuniao").val(curReuniao.descricao);
+	
+	
+	
+	
 }
 
 
@@ -69,8 +89,6 @@ function saveReuniao(event) {
 	});
 	
 }
-
-function pageContainerChanged(event, ui) {}
 
 function carregarContactosDisponiveis() {
 	$.get(phpFunctions, {'operation':'contactos_html', 'email':utilizador.email}, function(data) {
