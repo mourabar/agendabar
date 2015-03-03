@@ -4,6 +4,7 @@ var utilizador = null;
 var connection = null;
 var curReuniao = null;
 var curIntervenientes = null;
+var isUpdating = false;
 var app = { initialize: function() { this.bindEvents(); }, bindEvents: function() { document.addEventListener('deviceready', this.onDeviceReady, false); }, onDeviceReady: deviceIsReady }
 
 $(document).ready(documentIsReady);
@@ -23,7 +24,14 @@ function deviceIsReady() {
 		$("#confirmarCancelarReuniao").click(cancelarReuniao);
 		$("#logout").click(function(e) { $.get(phpFunctions, {'operation':'user_logout'}, function(data){ alert(data); }); });
 		$("#alterar-reuniao").click(prepararReuniaoParaEditar);
+		$("#cancelarAlteracao").click(cancelarAgendamento);	
 	}
+}
+
+function cancelarAgendamento(e) {
+	isUpdating = false;
+	carregarContactosDisponiveis();
+	$("#agendar-reuniao-form").reset();
 }
 
 function cancelarReuniao(e) {
@@ -34,6 +42,7 @@ function cancelarReuniao(e) {
 }
 
 function prepararReuniaoParaEditar(e) {
+	isUpdating = true;
 	$("#data-dia").val(curReuniao.dia_ymd[2]);
 	$("#data-mes").val(curReuniao.dia_ymd[1]);
 	$("#inicio-hora").val(curReuniao.inicio.split(":")[0]);
@@ -50,7 +59,7 @@ function prepararReuniaoParaEditar(e) {
 				$(this).removeAttr("selected");
         });			
 	}
-	$("select").selectmenu('refresh');	
+	$("select").selectmenu('refresh');
 }
 
 
