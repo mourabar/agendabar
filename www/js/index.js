@@ -82,21 +82,49 @@ function contactoTapped(contacto) {}
 function saveReuniao(event) {
 	event.preventDefault();
 	var date = new Date();
-	$.get(phpFunctions, {'operation':'reunioes_adicionar', 'reuniao':{
-		'idutilizador':utilizador.idutilizador,
-		'idsala':$("#idsala").val(),
-		'dia':date.getFullYear() + '-' + $("#data-mes").val() + '-' +$("#data-dia").val(),
-		'inicio':$("#inicio-hora").val() + ':' + $("#inicio-minuto").val() + ':00',
-		'fim':$('#fim-hora').val() + ':' + $('#fim-minuto').val() + ':00',
-		'descricao':$("#descricao-reuniao").val(),
-		'intervenientes':$("#intervenientes-reuniao").val()
-	}}, function(response) {
-		if(response != -1) {
-			alert(response);
-			$.mobile.changePage("#home");
-			$.get(phpFunctions, {"operation":"reunioes_html"}, reunioesListFill);
-		}
-	});
+	
+	if(isUpdating == false)
+	
+		$.get(phpFunctions, {'operation':'reunioes_adicionar', 'reuniao':{
+			'idutilizador':utilizador.idutilizador,
+			'idsala':$("#idsala").val(),
+			'dia':date.getFullYear() + '-' + $("#data-mes").val() + '-' +$("#data-dia").val(),
+			'inicio':$("#inicio-hora").val() + ':' + $("#inicio-minuto").val() + ':00',
+			'fim':$('#fim-hora').val() + ':' + $('#fim-minuto').val() + ':00',
+			'descricao':$("#descricao-reuniao").val(),
+			'intervenientes':$("#intervenientes-reuniao").val()
+		}}, function(response) {
+			if(response != -1) {
+				alert(response);
+				$.mobile.changePage("#home");
+				$.get(phpFunctions, {"operation":"reunioes_html"}, reunioesListFill);
+			}
+		});
+		
+	else
+	
+		$.get(phpFunctions, {
+		
+			'operation':'reunioes_alterar','reuniao':{
+				
+				'idreuniao':curReuniao.idreuniao,
+				'idutilizador':utilizador.idutilizador,
+				'idsala':$("#idsala").val(),
+				'dia':date.getFullYear() + '-' + $("#data-mes").val() + '-' +$("#data-dia").val(),
+				'inicio':$("#inicio-hora").val() + ':' + $("#inicio-minuto").val() + ':00',
+				'fim':$('#fim-hora').val() + ':' + $('#fim-minuto').val() + ':00',
+				'descricao':$("#descricao-reuniao").val(),
+				'intervenientes':$("#intervenientes-reuniao").val()
+				
+			}
+		
+		}, function(response){
+			if(response != -1) {
+				alert(response);
+				$.mobile.changePage("#home");
+				$.get(phpFunctions, {"operation":"reunioes_html"}, reunioesListFill);
+			}
+		});
 	
 }
 
