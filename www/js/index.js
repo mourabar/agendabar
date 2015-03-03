@@ -20,23 +20,22 @@ function deviceIsReady() {
 		$("#agendarBT").click(function(e){ $("#agendar-reuniao-form")[0].reset(); })
 		$("#saveReuniao").click(saveReuniao);
 		$("#gotoContactosBT").click(loadContactos);		
-
 		$("#confirmarCancelarReuniao").click(cancelarReuniao);
-		$("#logout").click(function(e) { $.get(phpFunctions, {'operation':'user_logout'}, function(data){ alert(data); }); });
-		
-		
-		
+		$("#logout").click(function(e) { $.get(phpFunctions, {'operation':'user_logout'}, function(data){ alert(data); }); });	
 	}
 }
 
 function cancelarReuniao(e) {
 	
+	// alert(curReuniao.idreuniao);
+	
 	$.get(phpFunctions, {'operation':'reunioes_eliminar', 'idreuniao':curReuniao.idreuniao }, function(data){
-	
+		
+		$("#detalhes").panel("close");
+		
 		$.get(phpFunctions, {"operation":"reunioes_html"}, reunioesListFill);
-	
-	});
-	
+		
+	});	
 }
 
 
