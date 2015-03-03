@@ -26,15 +26,9 @@ function deviceIsReady() {
 }
 
 function cancelarReuniao(e) {
-	
-	// alert(curReuniao.idreuniao);
-	
 	$.get(phpFunctions, {'operation':'reunioes_eliminar', 'idreuniao':curReuniao.idreuniao }, function(data){
-		
-		$("#detalhes").panel("close");
-		
+		$("#detalhes").panel("close");	
 		$.get(phpFunctions, {"operation":"reunioes_html"}, reunioesListFill);
-		
 	});	
 }
 
