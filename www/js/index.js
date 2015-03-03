@@ -82,9 +82,7 @@ function contactoTapped(contacto) {}
 function saveReuniao(event) {
 	event.preventDefault();
 	var date = new Date();
-	
 	if(isUpdating == false)
-	
 		$.get(phpFunctions, {'operation':'reunioes_adicionar', 'reuniao':{
 			'idutilizador':utilizador.idutilizador,
 			'idsala':$("#idsala").val(),
@@ -95,18 +93,13 @@ function saveReuniao(event) {
 			'intervenientes':$("#intervenientes-reuniao").val()
 		}}, function(response) {
 			if(response != -1) {
-				alert(response);
 				$.mobile.changePage("#home");
 				$.get(phpFunctions, {"operation":"reunioes_html"}, reunioesListFill);
 			}
-		});
-		
+		});	
 	else
-	
 		$.get(phpFunctions, {
-		
 			'operation':'reunioes_alterar','reuniao':{
-				
 				'idreuniao':curReuniao.idreuniao,
 				'idutilizador':utilizador.idutilizador,
 				'idsala':$("#idsala").val(),
@@ -115,17 +108,13 @@ function saveReuniao(event) {
 				'fim':$('#fim-hora').val() + ':' + $('#fim-minuto').val() + ':00',
 				'descricao':$("#descricao-reuniao").val(),
 				'intervenientes':$("#intervenientes-reuniao").val()
-				
 			}
-		
 		}, function(response){
 			if(response != -1) {
-				alert(response);
 				$.mobile.changePage("#home");
 				$.get(phpFunctions, {"operation":"reunioes_html"}, reunioesListFill);
 			}
 		});
-	
 }
 
 function carregarContactosDisponiveis() {
