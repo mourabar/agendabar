@@ -27,9 +27,9 @@
                 <h1 id="data">Sexta, 16 de Setembro</h1>
                 <h3 id="sala">Sala de Vidro</h3>
                 <p id="hora"><strong>16:00 / 17:30</strong></p>
-                <button id="alterar-reuniao" class="ui-btn ui-btn-inline">Alterar</button>
-                <a href="#cancelar-reuniao" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">Cancelar</a>
-                <div data-role="popup" id="cancelar-reuniao" data-dismissible="false">
+                <a id="alterar-reuniao" href="#agendar" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Alterar</a>
+                <a id="cancelar-reuniao" href="#cancelar-reuniao-pop" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Cancelar</a>
+                <div data-role="popup" id="cancelar-reuniao-pop" data-dismissible="false">
                 	<div data-role="header" data-theme="a"><h1>Confirmar</h1></div>
                     <div data-role="content">
                         <h3>Tem a certeza que pretende cancelar esta reunião?</h3>
@@ -59,12 +59,12 @@
             <div data-role="content">
             	<a id="agendarBT" href="#agendar" data-position="fixed" data-role="button" data-transition="slide" data-icon="plus">Agendar Reunião</a>
                 <ul id="reunioesLista" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Localizar"></ul>
-                <button data-role="button" id="logout">Log Out</button>
+                <button data-role="button" id="logout" style="display:none">Log Out</button>
 			</div>
         </div>
         <div data-role="page" id="agendar" data-theme="b">
         	<div data-role="header" data-position="fixed">
-                <a href="#home" data-transition="slide" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete">Cancel</a>
+                <a href="#home" id="cancelarAlteracao" data-transition="slide" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete">Cancel</a>
                 <h1>Dados Reunião</h1>
                 <a href="#home" id="saveReuniao" data-transition="slide" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-check">Save</a>
             </div>
@@ -75,15 +75,15 @@
                         <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
                     </select>
                     <select id="data-mes" name="data-mes" data-native-menu="false">
-                        <option value="1">Janeiro</option>
-                        <option value="2">Fevereiro</option>
-                        <option value="3">Março</option>
-                        <option value="4">Abril</option>
-                        <option value="5">Maio</option>
-                        <option value="6">Junho</option>
-                        <option value="7">Julho</option>
-                        <option value="8">Agosto</option>
-                        <option value="9">Setembro</option>
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
                         <option value="10">Outubro</option>
                         <option value="11">Novembro</option>
                         <option value="12">Dezembro</option>
@@ -120,26 +120,26 @@
 		</div>
         <div data-role="page" id="contactos" data-theme="b">
         	<div data-role="panel" data-position="right" id="profile">
-            	<div id="no-photo" class="profile-no-photo-small"></div>
-                <p><strong>Nuno Moura</strong><br/>Web Developer</p>
+            	<div id="contacto_foto" class="profile-no-photo-small"></div>
+                <p><strong><span id="contacto_nome">Nuno Moura</span></strong><br/><span id="contacto_cargo">Web Developer</span></p>
                 <ul data-role="listview" data-inset="true">
-                	<li><a href="#profile" data-icon="forward"><p>nuno.moura@gmail.com</p></a></li>
-                	<li><a href="#profile" data-icon="forward"><p>+351 911 133 128</p></a></li>
+                	<li><a id="contacto_mail" href="mailto:nuno.moura@barlisboa.com" data-icon="forward"><p id="contacto_email">nuno.moura@gmail.com</p></a></li>
+                	<li><a id="contacto_ligar" href="tel:+351 911 133 128" data-icon="forward"><p id="contacto_telefone">+351 911 133 128</p></a></li>
                 </ul>
-                <a href="#adicionar-contacto" data-transition="flip" data-role="button" data-icon="gear">Editar</a>
-                <a href="#" data-transition="flip" data-role="button" data-icon="minus">Eliminar</a>		
+                <a href="#adicionar-contacto" data-transition="flip" data-role="button" style="display:none" data-icon="gear">Editar</a>
+                <a href="#" data-transition="flip" data-role="button" data-icon="minus" style="display:none">Eliminar</a>		
             </div>
         	<div data-role="header" data-position="fixed">
             	<h2>Agenda BAR</h2>
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#home" class="ui-btn-active" data-transition="slide" data-icon="home">Reuniões</a></li>
-                        <li><a href="#contactos" data-transition="slide" data-icon="search">contactos</a></li>
+                        <li><a href="#home" data-transition="slide" data-icon="home">Reuniões</a></li>
+                        <li><a href="#contactos" data-transition="slide" data-icon="search" class="ui-btn-active">contactos</a></li>
                     </ul>
                 </div>
             </div>
             <div data-role="content">
-            	<a href="#adicionar-contacto" data-role="button" data-icon="plus" data-transition="slide">Adicionar Contacto</a>
+            	<a href="#adicionar-contacto" data-role="button" data-icon="plus" data-transition="slide" style="display:none">Adicionar Contacto</a>
                 <ul data-role="listview" id="contactosLista" data-inset="true" data-filter="true" data-filter-placeholder="Localizar">
                 	<li data-role="list-divider">N<span class="ui-li-count">1</span></li>
                 	<li>
