@@ -59,7 +59,7 @@
             <div data-role="content">
             	<a id="agendarBT" href="#agendar" data-position="fixed" data-role="button" data-transition="slide" data-icon="plus">Agendar Reunião</a>
                 <ul id="reunioesLista" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Localizar"></ul>
-                <button data-role="button" id="logout">Log Out</button>
+                <button data-role="button" id="logout" style="display:none">Log Out</button>
 			</div>
         </div>
         <div data-role="page" id="agendar" data-theme="b">
@@ -120,14 +120,14 @@
 		</div>
         <div data-role="page" id="contactos" data-theme="b">
         	<div data-role="panel" data-position="right" id="profile">
-            	<div id="no-photo" class="profile-no-photo-small"></div>
-                <p><strong>Nuno Moura</strong><br/>Web Developer</p>
+            	<div id="contacto_foto" class="profile-no-photo-small"></div>
+                <p><strong><span id="contacto_nome">Nuno Moura</span></strong><br/><span id="contacto_cargo">Web Developer</span></p>
                 <ul data-role="listview" data-inset="true">
-                	<li><a href="#profile" data-icon="forward"><p>nuno.moura@gmail.com</p></a></li>
-                	<li><a href="#profile" data-icon="forward"><p>+351 911 133 128</p></a></li>
+                	<li><a id="contacto_mail" href="mailto:nuno.moura@barlisboa.com" data-icon="forward"><p id="contacto_email">nuno.moura@gmail.com</p></a></li>
+                	<li><a id="contacto_ligar" href="tel:+351 911 133 128" data-icon="forward"><p id="contacto_telefone">+351 911 133 128</p></a></li>
                 </ul>
-                <a href="#adicionar-contacto" data-transition="flip" data-role="button" data-icon="gear">Editar</a>
-                <a href="#" data-transition="flip" data-role="button" data-icon="minus">Eliminar</a>		
+                <a href="#adicionar-contacto" data-transition="flip" data-role="button" style="display:none" data-icon="gear">Editar</a>
+                <a href="#" data-transition="flip" data-role="button" data-icon="minus" style="display:none">Eliminar</a>		
             </div>
         	<div data-role="header" data-position="fixed">
             	<h2>Agenda BAR</h2>
@@ -139,7 +139,7 @@
                 </div>
             </div>
             <div data-role="content">
-            	<a href="#adicionar-contacto" data-role="button" data-icon="plus" data-transition="slide">Adicionar Contacto</a>
+            	<a href="#adicionar-contacto" data-role="button" data-icon="plus" data-transition="slide" style="display:none">Adicionar Contacto</a>
                 <ul data-role="listview" id="contactosLista" data-inset="true" data-filter="true" data-filter-placeholder="Localizar">
                 	<li data-role="list-divider">N<span class="ui-li-count">1</span></li>
                 	<li>
