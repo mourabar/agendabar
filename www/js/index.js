@@ -8,7 +8,7 @@
 	
 	$(document).ready(documentIsReady);
 	
-	function documentIsReady(e) { app.initialize(); }
+	function documentIsReady(e) { app.initialize(); } 
 	
 	function deviceIsReady() {
 		if(navigator.connection.type == Connection.NONE) {
